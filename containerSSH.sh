@@ -1,4 +1,3 @@
-# interact with any container of k8 cluster
 function sshc() {
   PS3="Select a namespace: "
   select ns in $(kubectl get namespace | grep -v NAME | awk '{print $1}')
@@ -36,20 +35,6 @@ function sshc() {
     break
     done
   break
-  done
-  return $?
-}
-
-# EKS mssh
-function sshn() {
-  PS3="Select a node to ssh: "
-  select node in $(k get nodes | grep -v NAME | awk '{print $1}')
-  do
-    echo "Selected:  $node"
-    INSTANCE_ID=$(k describe node $node | awk -F'/' '/ProviderID/{print $5}')
-    REGION=$(k describe nodes $node | awk -F'=' '/topology.kubernetes.io\/region/{print $2}')
-    mssh --region $REGION ubuntu@$INSTANCE_ID
-    break
   done
   return $?
 }
