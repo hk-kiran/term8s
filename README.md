@@ -1,5 +1,5 @@
 # term8s
-A interactive terminal to access kubernetes cluster containers in a single go
+A interactive shell script to access kubernetes cluster containers in a single go
 
 
 Installation:
